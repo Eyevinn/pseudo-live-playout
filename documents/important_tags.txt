@@ -1,0 +1,61 @@
+important tags
+
+#EXT-X-PLAYLIST-TYPE
+
+	*** VIKTIGT ***
+	om denna tag är 'VOD' måste den ändras till 'EVENT' eller inget (första gången),
+	sedan tas bort från utströmmen (resterande gånger)
+
+#EXT-X_KEY
+#EXT-X-SESSION-KEY
+
+	dessa nycklar får bara existera en gång i utströmmen, och ska vara samma i alla källor
+
+
+#EXT-X-INDEPENDENT-SEGMENT
+
+	denna nyckel ska bara vara med om den är med i ALLA källor
+
+
+#EXT-X-VESION
+
+	denna nyckel ska vara högsta värdet i källorna
+
+
+#EXT-X-MEDIA-SEQUENCE
+§4.3.3.2
+§6.2.1
+§6.3.5
+
+	om den finns, måste utströmmen numreras om
+
+
+#EXT-X-DISCONTINUITY-SEQUENCE
+
+	*** VIKTIGT ***
+	sys in mellan källor
+
+
+#EXT-X-ENDLIST
+
+	måste tas bort, såvida segentet inte är det faktist sista
+
+
+#EXT-X-I-FRAMES-ONLY
+
+	tas bort om inte alla källor har den
+
+
+#EXT-X-INDEPENDENT-SEGMENTS
+
+	(master playlist only)
+	om ALLA källor i alla format har #EXT-X-INDEPENDENT-SEGMENT
+
+
+#EXT-X-START
+
+	tas bort efter första gången
+
+
+
+
