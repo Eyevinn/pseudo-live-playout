@@ -1,0 +1,11 @@
+from flask import request
+
+@app.route("/test", methods=['GET', 'POST'])
+def test():
+	id = '';
+	if request.method == 'POST':
+		if 'id' in request.form:
+			id = request.form['id']
+	if request.method == 'GET':
+		id = request.args.get('id', '')
+
