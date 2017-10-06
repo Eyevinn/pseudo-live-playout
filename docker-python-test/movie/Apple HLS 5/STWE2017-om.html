@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<title>Compressor - Skapa HTTP-strömfilm - STWE2017.m3u8</title>
+	<td><h1>Anvisningar för postning av <i>STWE2017.m3u8</i> på din webbplats</h1></td>
+<div id="summary">
+	<p>Du har exporterat <i>STWE2017.m3u8</i> med Compressor, Final Cut Pro eller Motion. Följande information hjälper dig att posta filmen på din webbplats i samma mapp som den här HTML-filen med instruktioner.</p>
+	<p>Det finns även en HTTP-strömspellista (.m3u8) i mappen som väljer bäst version för dina besökares olika enheter och nuvarande anslutningshastigheter. Genom att inkludera denna spellista på din HTML-sida ser du till att videon på webbplatsen fungerar suveränt för alla.</p>
+	<p>Compressor har placerat de angivna versionerna av filmen enligt dina måls specifikation.</p>
+
+<div id="textembed">
+	<p>Använd följande HTML-kod till att bädda in filmen på webbsidan.</p>
+	<h3>Viktiga anmärkningar:</h3>
+	<ul>
+		<li>Om du vill dela med dig av medier via internet måste dina mediefiler (filmer, vinjettbilder) finnas på en server som allmänheten har tillgång till.</li>
+		<li>URL-parametrarna måste ändras om dina mediefiler ligger på en annan server än din webbsida.</li>
+		<li>Filmens URL-parametrar måste alltid peka på strömspellistan.</li>
+		<li>Sökvägarna i spellistan (.m3u8) bör vara relativa gentemot spellistan och strömsegmenten.</li>
+	</ul>
+	</p>
+
+<p>Exempelkod för webbsidan:</p>
+<textarea rows="3" cols="80">
+	
+	&lt;video src="STWE2017.m3u8" controls autoplay>&lt;/video&gt;
+</textarea>
+<p>Exempelkod för en komplett webbsida:</p>
+<textarea rows="20" cols="80">
+	
+	&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+	&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+	&lt;html&gt;
+	&lt;head&gt;
+	        &lt;title>HTTP Live Streaming Test&lt;/title&gt;
+	        &lt;meta name="viewport" content="width=0; height=0; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/&gt;
+	&lt;/head&gt;
+	&lt;body style="background-color:#FFFFFF;"&gt;
+	&lt;center&gt;
+	&lt;video src="STWE2017.m3u8" controls autoplay>&lt;/video&gt;
+	&lt;/center&gt;
+	&lt;/body&gt;
+	&lt;/html&gt;
+
+</textarea>
+</body>
+</html>

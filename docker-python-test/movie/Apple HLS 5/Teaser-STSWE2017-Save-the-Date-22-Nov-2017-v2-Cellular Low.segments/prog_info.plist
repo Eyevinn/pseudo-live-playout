@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>audioCodecInfo</key>
+	<string>mp4a.40.2</string>
+	<key>avgBitRate</key>
+	<real>238875.23642732049</real>
+	<key>iframe_MaxBitRate</key>
+	<real>90240</real>
+	<key>iframe_avgBitRate</key>
+	<real>54286.234676007007</real>
+	<key>maxBitRate</key>
+	<real>258600.99173553719</real>
+	<key>videoCodecInfo</key>
+	<string>avc1.42e015</string>
+	<key>videoDimensions</key>
+	<dict>
+		<key>Height</key>
+		<real>240</real>
+		<key>Width</key>
+		<real>428</real>
+	</dict>
+</dict>
+</plist>
