@@ -13,51 +13,86 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-	try:
-		visits = redis.incr("counter")
-	except RedisError:
-		visits = "<i>cannot connect to Redis, counter disabled</i>"
 
-	html = "<h3>Hello {name}!</h3>" \
-	       "<b>Hostname:</b> {hostname}<br/>" \
-	       "<b>Visits:</b> {visits}"
-	return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
+	html = "<h3> PCE ver 0.1.1 </h3>" \
+	       "This service is not intended to be used manually <br/>" \
+	       "Please use the associated client <br/>"
+	return html.format()
 
-@app.route("/ver", methods=['GET', 'POST'])
-def ver():
-	return "<h3>--- Version 5 ---</h3>"
+sessions =  {                                           \
+	2001 : {                                            \
+		'sid' : 2001,                                   \
+		'pid' : 1001,                                   \
+		'name' : 'default',                             \
+		'tabl' : ['prg001', 'prg002', 'prg003']         \
+	},                                                  \
+	2002 : {                                            \
+		'sid' : 2002,                                   \
+		'pid' : 1002,                                   \
+		'name' : 'daniel',                              \
+		'tabl' : ['prg004', 'prg003', 'prg002']         \
+	},                                                  \
+}
 
-@app.route("/test", methods=['GET', 'POST'])
-def test():
 
-	id = '';
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+
+	name = '';
 	if request.method == 'POST':
-		if 'id' in request.form:
-			id = request.form['id']
+		if 'name' in request.form:
+			name = request.form['id']
 	if request.method == 'GET':
-		id = request.args.get('id', '')
+		name = request.args.get('name', '')
 
-	html = "<h3>Test</h3>" \
-	       "<b>Id: </b> {id}<br>"
+	pid = 1001
+	sid = 2001
+	if name == 'daniel':
+		pid = 1002
+		sid = 2002
 
-	return html.format(id=id)
+	html = "Login successful<br>" \
+	       "pid:{pid}<br>" \
+	       "sid:{sid}<br>"
+
+	return html.format(pid=pid, sid=sid)
 
 
-@app.route("/log", methods=['GET', 'POST'])
-def log():
+@app.route("/tableau", methods=['GET', 'POST'])
+def tableau():
 
-	id = '';
+	sid = '';
 	if request.method == 'POST':
-		if 'id' in request.form:
-			id = request.form['id']
+		if 'sid' in request.form:
+			sid = request.form['sid']
 	if request.method == 'GET':
-		id = request.args.get('id', '')
+		sid = request.args.get('sid', '')
 
-	html = "<h3>hi {name}!</h3>" \
-	       "<b>Id: </b> {id}<br>" \
-	       "<b>Hostname:</b> {hostname}<br/>"
+	if sid in sessions:
 
-	return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), id=id)
+		post = sessions[sid]
+
+		html = "<h3>Program tableau for {name}<h3><br>";
+
+		for t in post['tabl']:
+			html += t + '<br>'
+
+		return html.format(name=post.name)
+
+	else:
+
+		html = "Error 404 no such session id ({sid})<br>";
+		return html.format(sid=sid)
+
+
+@app.route("/debug", methods=['GET', 'POST'])
+def debug():
+	print sessions
+
+	out = map( str, sessions )
+	html = "<br>".join(out)
+
+	return html.format()
 
 
 if __name__ == "__main__":
