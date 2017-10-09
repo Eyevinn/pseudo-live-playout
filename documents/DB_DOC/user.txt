@@ -1,0 +1,17 @@
+
+
+
+message definition (JSON)
+
+ === LOGIN ===
+
+ === LOGIN SUCESS ===
+
+ === LOGIN FAIL ===
+
+ === REQUEST INFO ===
+
+ === INFO RESPONSE ===
+
+ === ERROR ===
+

@@ -1,2 +1,2 @@
 docker build -t tut .
-docker run --rm -p 4000:80 tut 
+docker run -a stderr -a stdin -a stdout -i --rm -p 4000:80 tut 
