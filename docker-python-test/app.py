@@ -21,20 +21,20 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
 
-	html = "<h3> PCE ver 0.1.05 </h3>" \
+	html = "<h3> PCE ver 0.1.06 </h3>" \
 	       "This service is not intended to be used manually <br/>" \
 	       "Please use the associated client <br/>"
 	return html.format()
 
 
 sessions =  {                                           \
-	'2001' : {                                          \
+	2001 : {                                          \
 		'sid' : 2001,                                   \
 		'pid' : 1001,                                   \
 		'name' : 'default',                             \
 		'tabl' : ['prg001', 'prg002', 'prg003']         \
 	},                                                  \
-	'2002' : {                                          \
+	2002 : {                                          \
 		'sid' : 2002,                                   \
 		'pid' : 1002,                                   \
 		'name' : 'daniel',                              \
@@ -127,16 +127,16 @@ def debug():
 	html = ''
 	for key1 in sessions:
 		val1 = sessions[key1]
-		html += "<h2>" + key1 + "</h2>"
+		html += "<h2>" + str(key1) + "</h2>"
 		for key2 in val1:
 			val2 = val1[key2]
-			html += str(key2) + " : " +str(val2) + " <br><br>"
-	
-	html += "<code>\n"
-	html += json.dumps(sessions, sort_keys=True, indent=4, separators=(', ', ': '))
-	html += "</code>\n"
+			html += str(key2) + " : " +str(val2) + " <br>"
+	html += "<br><br>\n"
+	html += "<pre>\n"
+	html += json.dumps(sessions, skipkeys=False, sort_keys=True, indent=4, separators=(', ', ' : '))
+	html += "</pre>\n"
 
-	return html.format()
+	return html
 
 
 if __name__ == "__main__":
