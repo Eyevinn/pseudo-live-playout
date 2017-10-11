@@ -1,0 +1,16 @@
+{
+  "name": "mongotest",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a MongoDB test app",
+  "keywords": [],
+  "dependencies": {
+    "mongo": "^0.1.0"
+  },
+  "scripts": {
+    "start": "node mongo.js"
+  },
+  "main": "mongo.js",
+  "author": "DanielN",
+  "license": ""
+}

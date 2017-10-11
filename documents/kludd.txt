@@ -1,0 +1,17 @@
+
+	USERLAND		USER DB		DB
+
+-> login
+
+	name pwd		Y/N SID		loginnamn	pwd		sid		date
+
+-> logout
+
+	sid
+	
+	
+
+
+
+hostname/login?name=daniel&pwd=daniel
+
