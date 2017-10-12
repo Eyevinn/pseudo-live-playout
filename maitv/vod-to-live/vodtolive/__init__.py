@@ -6,10 +6,17 @@ class HLSVod:
 		self.hlsManifestUri = hlsManifestUri
 		self.m3u8_obj = m3u8.load(self.hlsManifestUri)
 		self.segments = {}
+
+		print "HLSVOD Object"
+		print self.m3u8_obj
+
+		print "BASE URI"
+		print self.m3u8_obj.base_uri
+
 		for playlist in self.m3u8_obj.playlists:
 			pth = self.m3u8_obj.base_uri + playlist.uri
-			#print "PATH: "
-			#print pth
+			print "PLAYLIST URI: "
+			print pth
 			m3u8_playlist = m3u8.load(pth)
 			for segment in m3u8_playlist.segments:
 				key = str(playlist.stream_info.bandwidth)
@@ -39,30 +46,12 @@ class HLSVod:
 	def get_segment(self, bitrate):
 		res = ""
 
-		#GET two segments of a given bitrate
-		#print "Get segments starts"
-		count= 0
-		while (count < len(self.segments)):
+		res += self.m3u8_obj.base_uri + self.segments[bitrate] [self.index].uri    + "\n"
+		res += self.m3u8_obj.base_uri + self.segments[bitrate] [self.index+1].uri  + "\n"
+		next(self)
 
-			if count == len(self.segments)+1:
-				count = 0
-				self.index = 0
-
-			res += self.segments[bitrate] [self.index].uri 
-			res += self.segments[bitrate] [self.index+1].uri
-			count += 1
-			self.index +=1
-			
-			print "omgang: "
-			print count
-			print res
-		#count = 0
-		#print res
-		#print "LENGTH"
-		#print len(self.segments)
-
-
-
+		return res
+	
 
 	def dump(self):
 		print self.segments
@@ -70,6 +59,4 @@ class HLSVod:
 		#for playlist in self.m3u8_obj.playlists:
 		#	print playlist.uri
 
-	def get_segment2(self):
-		return "hej"
 
