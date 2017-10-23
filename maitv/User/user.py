@@ -17,24 +17,18 @@ class User:
     def my_id(self):
         return self.session_id_counter
 
-    def get_name(self):
+    def get_name(self)
         return self.user_name
 
     def restart(self):
         self.curret_tab_start = time.mktime(time.gmtime())
 
-    def next(self):
-        self.vod.next()
-
     def request_main(self, uid):
         self.vod = HLSVod(self.tableu[self.tab_index])
-        return self.vod.get_user_master_manifest(uid)
+        return vod.get_user_master_manifest(uid)
 
     def request_variant(self, bandwidth):
-        #print "trying to get bandwidth " + str(bandwidth)
-        #print self.vod.list_bitrates()
-        mediamanifeststring = self.vod.get_segment(bandwidth)
-        return mediamanifeststring
+        mediamanifeststring = vod.get_live_media_manifest(bandwidth)
 
 
 
