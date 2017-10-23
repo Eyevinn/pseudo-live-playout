@@ -3,7 +3,7 @@ python setup.py develop
 
 python test.py
 
-docker run -v /Users/NAMN/:/mnt/ -it eyevinntechnology/toolbelt:latest /bin/bash
+docker run -p 8080:8080 -v /Users/NAMN/:/mnt/ -it eyevinntechnology/toolbelt:latest /bin/bash
 
 mariliabognandi [11:53] 
 Kör först det där docker run osv. Sen cd:ar du till mnt mappen då är det som att
