@@ -61,8 +61,8 @@ def start():
 	html = "Hello there {name} \n"
 	return html.format( name=u.get_name() )
 
-#MIMETPE = 'application/x-mpegURL'
-MIMETPE = 'text/m3u8'
+MIMETPE = 'application/x-mpegURL'
+#MIMETPE = 'text/m3u8'
 
 @app.route("/play.m3u8", methods=['GET', 'POST'])
 def play():
@@ -80,6 +80,7 @@ def play():
 	#mastermanifeststring = vod.get_live_master_manifest()
 	#mastermanifeststring = vod.get_user_master_manifest(uid)
 
+	print "response now"
 	return Response(res,mimetype=MIMETPE)
 	#mastermanifeststring
 

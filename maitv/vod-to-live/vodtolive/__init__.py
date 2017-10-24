@@ -22,7 +22,7 @@ class HLSVod:
 					self.segments[key] = []
 					self.seg_count = 0
 				self.segments[key].append(segment)
-					self.seg_count += 1
+				self.seg_count += 1
 
 	def list_playlists(self):
 		print self.m3u8_obj.playlists
@@ -33,10 +33,10 @@ class HLSVod:
 			res += str(btr) + ", "
 		return res
 
-	def get_segment_count(self)
+	def get_segment_count(self):
 		return self.seg_count
 
-	def get_header_lead(self, index)
+	def get_header_lead(self, index):
 		res = ""
 		res += "#EXTM3U" + "\n"
 		res += "#EXT-X-VERSION:3" + "\n"
@@ -44,18 +44,18 @@ class HLSVod:
 		res += "#EXT-X-MEDIA-SEQUENCE:" + str(index) + "\n"
 		return res;
 
-	def get_header_normal(self)
+	def get_header_normal(self):
 		res = ""
-		res += "#EXTM3U" + "\n"
-		res += "#EXT-X-VERSION:3" + "\n"
-		res += "#EXT-X-TARGETDURATION:4" + "\n"
+		#res += "#EXTM3U" + "\n"
+		#res += "#EXT-X-VERSION:3" + "\n"
+		#res += "#EXT-X-TARGETDURATION:4" + "\n"
 		return res;
 
-	def get_header_seam(self)
+	def get_header_seam(self):
 		res = ""
-		res += "#EXTM3U" + "\n"
-		res += "#EXT-X-VERSION:3" + "\n"
-		res += "#EXT-X-TARGETDURATION:4" + "\n"
+		#res += "#EXTM3U" + "\n"
+		#res += "#EXT-X-VERSION:3" + "\n"
+		#res += "#EXT-X-TARGETDURATION:4" + "\n"
 		res += "#EXT-X-DISCONTINUITY-SEQUENCE" + "\n"
 		res += "#EXT-X-MEDIA-SEQUENCE:0\n"
 		return res;

@@ -17,8 +17,9 @@ class User:
 		self.seg_index = 0
 		self.curret_tab_start = time.mktime(time.gmtime())
 		self.vods = []
-		for pl in self.tableu
-			self.vods.append( HLSVod(self.tableu[self.tab_index] )
+		for pl in self.tableu:
+			self.vods.append(HLSVod(self.tableu[self.tab_index]))
+			print "added one playlist"
 
 
 	def my_id(self):
@@ -52,7 +53,7 @@ class User:
 		else:
 			nxt_tab = self.tab_index
 			nxt_seg = self.seg_index + 1
-			res += self.vods[nxt_tab].get_header_normal(nxt_seg)
+			res += self.vods[nxt_tab].get_header_normal()
 			res += self.vods[nxt_tab].get_segment(bandwidth, nxt_seg)
 		return res
 
@@ -60,5 +61,6 @@ class User:
 		self.seg_index += 1
 		if self.seg_index >= self.vods[self.tab_index].get_segment_count():
 			self.tab_index += 1
+			self.seg_index = 0
 
 
