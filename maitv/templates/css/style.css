@@ -1,0 +1,24 @@
+body {
+	background: rgba(0,0,0,0.85);
+}
+
+h1,h2,h3,h4,h5 {
+	font-family: 'Roboto Mono', monospace;
+}
+
+p {
+	font-family: 'Rubik', sans-serif;
+}
+#logo-section {
+	display: inline;
+}
+#maitv-logo-orange {
+	letter-spacing: 0.5em;
+	color: #ff5500;
+	display: inline
+}
+#maitv-logo-red {
+	letter-spacing: 0.5em;
+	color: #ff2a00;
+	display: inline
+}

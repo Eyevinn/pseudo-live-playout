@@ -1,0 +1,43 @@
+<!--
+<h3>Hello world!</h3><b>Hostname:</b> a32348bef0a1<br/><b>Visits:</b> <i>cannot connect to Redis, counter disabled</i>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MaiTV</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Rubik" rel="stylesheet">
+</head>
+<body style="text-align:center;">
+
+	<div id="logo-section">
+		<h1 id="maitv-logo-orange">M</h1>
+		<h1 id="maitv-logo-red">AI</h1>
+		<h1 id="maitv-logo-orange">TV</h1>
+	</div>
+
+	
+
+	<div id="videoplayer-section" style="background: rgba(0,0,0,1); width: 960px; height: 540px; margin: 0 auto;">
+		<video id="videoplayer" width="100%"></video>
+		<button id="play">PLAY</button>
+	</div>
+
+	<script>
+	  if(Hls.isSupported()) {
+	    var video = document.getElementById('videoplayer');
+	    var hls = new Hls();
+	    hls.loadSource('http://localhost:8080/play.m3u8?uid=1');
+	    hls.attachMedia(video);
+	    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+	    	console.log("parse ok");
+	      video.play();
+	  });
+	 }
+	</script>
+
+</body>
+</html>

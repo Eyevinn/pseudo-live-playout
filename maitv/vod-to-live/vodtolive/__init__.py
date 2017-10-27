@@ -141,7 +141,7 @@ class HLSVod:
 			master_manifest_string += "\n" + "variant.m3u8?uid="
 			master_manifest_string += uid + "&btr=" + str(playlist.stream_info.bandwidth)
 			master_manifest_string += "\n"
-
+			break
 			#counter += 1
 
 		return master_manifest_string
