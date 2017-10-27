@@ -1,10 +1,12 @@
 $(document).ready(function(){
 
  console.log("Hello World!");
-
  $( "#play" ).click(function() {
-  console.log("Play button clicked!");
-  $('#videoplayer').play();
+    console.log("Play button clicked!");
+    //alert('play video!');
+    var video = document.getElementById('videoplayer');
+    video.play();
+    //$('#videoplayer').play();
 });
 
  var myVideos;

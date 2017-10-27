@@ -111,7 +111,18 @@ def view():
 
 	res = "" + u.request_main(uid)
 
-	return render_template('playlistview.html', res=res), 200, {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, HEAD', 'Access-Control-Max-Age': 3000}
+	jssnutt = " titles = ["
+	first = True
+	for t in u.titles:
+		if not first:
+			jssnutt += ", "
+		jssnutt += '"' + str(t) + '"'
+		first = False
+	jssnutt += "];"
+
+	print jssnutt
+
+	return render_template('playlistview.html', res=res, jssnutt=jssnutt), 200, {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, HEAD', 'Access-Control-Max-Age': 3000}
 
 #('Access-Control-Allow-Origin', '*')
 #	return render_template('js/index.js'), 200, {'Content-Type': 'text/js'}

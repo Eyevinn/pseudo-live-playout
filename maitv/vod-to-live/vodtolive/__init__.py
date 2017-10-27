@@ -57,7 +57,7 @@ class HLSVod:
 		#res += "#EXT-X-VERSION:3" + "\n"
 		#res += "#EXT-X-TARGETDURATION:4" + "\n"
 		res += "#EXT-X-DISCONTINUITY-SEQUENCE" + "\n"
-		res += "#EXT-X-MEDIA-SEQUENCE:0\n"
+		#res += "#EXT-X-MEDIA-SEQUENCE:0\n"
 		return res;
 
 	def get_segment(self, bitrate, index):

@@ -13,6 +13,8 @@ class User:
 		self.tableu = [
 			'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS/HTTP%20example.m3u8',
 			'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS/HTTP%20example.m3u8']
+		self.titles = ['Video ETT', 'Video 2']
+		self.sequence_number = 0
 		self.tab_index = 0
 		self.seg_index = 0
 		self.curret_tab_start = time.mktime(time.gmtime())
@@ -40,7 +42,7 @@ class User:
 		#print "trying to get bandwidth " + str(bandwidth)
 		#print self.vod.list_bitrates()
 		res = ""
-		res += self.vods[self.tab_index].get_header_lead(self.seg_index)
+		res += self.vods[self.tab_index].get_header_lead(self.sequence_number)
 		res += self.vods[self.tab_index].get_segment(bandwidth, self.seg_index)
 		if (self.seg_index+1) >= self.vods[self.tab_index].get_segment_count():
 			nxt_tab = self.tab_index + 1
@@ -62,5 +64,6 @@ class User:
 		if self.seg_index >= self.vods[self.tab_index].get_segment_count():
 			self.tab_index += 1
 			self.seg_index = 0
+		self.sequence_number += 1
 
 
