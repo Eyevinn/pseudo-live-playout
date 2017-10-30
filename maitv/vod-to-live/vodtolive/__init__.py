@@ -11,6 +11,7 @@ class HLSVod:
 		self.segments = {}
 		self.uris = {}
 		self.seg_count = 0
+		self.playlength = 0
 
 		for playlist in self.m3u8_obj.playlists:
 			pth = self.m3u8_obj.base_uri + playlist.uri
@@ -21,8 +22,10 @@ class HLSVod:
 					self.uris[key] = folderof(pth)
 					self.segments[key] = []
 					self.seg_count = 0
+					self.playlength = 0
 				self.segments[key].append(segment)
 				self.seg_count += 1
+				self.playlength += segment.duration
 
 	def list_playlists(self):
 		print self.m3u8_obj.playlists
@@ -35,6 +38,9 @@ class HLSVod:
 
 	def get_segment_count(self):
 		return self.seg_count
+		
+	def get_playlength(self):
+		return self.playlength
 
 	def get_header_lead(self, index):
 		res = ""

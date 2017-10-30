@@ -6,11 +6,16 @@ from vodtolive import HLSVod
 master_tableu = [
 	'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS/HTTP%20example.m3u8',
 	'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%202/backhoppning.m3u8',
-	'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%203/karleken.m3u8',
+#	'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%203/karleken.m3u8',
 	'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%204/sportskor.m3u8',
 	'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%205/STWE2017.m3u8' ]
 
-master_titles = ['Springa', 'Backhopp', 'K&auml;rleken', 'Sportskor', 'STWE']
+master_titles = [
+	'Springa', 
+	'Backhopp', 
+#	'K&auml;rleken', 
+	'Sportskor', 
+	'STWE']
 
 class User:
 
@@ -22,6 +27,7 @@ class User:
 		self.user_name = user_name
 		self.tableu = []
 		self.titles = []
+		self.active = 0
 		for x in range(0, 3):
 			idx = randrange(len(master_tableu))
 			self.tableu.append(master_tableu[idx])
@@ -32,17 +38,19 @@ class User:
 		self.seg_index = 0
 		self.curret_tab_start = time.mktime(time.gmtime())
 		self.vods = []
-		for pl in self.tableu:
-			#print "about to add " + pl
-			self.vods.append(HLSVod(pl))
-			#print "added one playlist"
-
+		for idx, pl in enumerate(self.tableu):
+			hls = HLSVod(pl)
+			self.vods.append(hls)
+			self.titles[idx] += " : " + str(hls.get_playlength())
 
 	def my_id(self):
 		return self.session_id_counter
 
 	def get_name(self):
 		return self.user_name
+		
+	def get_active(self):
+		return self.active
 
 	def restart(self):
 		self.sequence_number = 0
@@ -83,5 +91,6 @@ class User:
 			self.tab_index += 1
 			self.seg_index = 0
 		self.sequence_number += 1
-
+		if self.seg_index >=4:
+			self.active = self.tab_index
 

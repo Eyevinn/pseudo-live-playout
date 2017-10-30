@@ -10,6 +10,11 @@ h1,h2,h3,h4,h5 {
 p {
 	font-family: 'Rubik', sans-serif;
 }
+
+#active-source {
+	color: #2222ff;
+}
+
 #logo-section {
 	display: inline;
 }

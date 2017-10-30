@@ -141,6 +141,19 @@ def view():
 #('Access-Control-Allow-Origin', '*')
 #	return render_template('js/index.js'), 200, {'Content-Type': 'text/js'}
 
+@app.route("/active", methods=['GET', 'POST'])
+def active():
+	if request.method == 'POST':
+		if 'uid' in request.form:
+			uid = request.form['uid']
+	if request.method == 'GET':
+		uid = request.args.get('uid', '')
+	
+	u = usermap[ int(uid) ]
+	html = ""
+	html += str(u.get_active())
+	return html
+
 @app.route("/play.m3u8", methods=['GET', 'POST'])
 def play():
 	if request.method == 'POST':

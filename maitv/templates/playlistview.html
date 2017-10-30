@@ -24,11 +24,17 @@
 	</div>
 
 	
+	<div id="active-source">
+	
+	</div>
+	
 
 	<div id="videoplayer-section" style="background: rgba(0,0,0,1); width: 960px; height: 540px; margin: 0 auto; text-align: center;">
 		<video id="videoplayer" width="100%"></video>
 		<button id="play">PLAY</button>
+		<br>
 	</div>
+
 
 	<div id="now-playing">
 	
@@ -42,6 +48,27 @@
 	<script>
 
     {{ jssnutt | safe }} 
+	
+	rep_cnt = 0
+	
+	function rep()
+	{
+	    var video = document.getElementById('videoplayer');
+	    var act_src = document.getElementById('active-source');
+		
+		rep_cnt += 1
+
+		act_src.innerHTML =
+			//" --- current src "   + " --- <B> " + String(video.currentSrc)   + " </B> --- <br>" +
+			//" --- src "           + " --- <B> " + String(video.src)          + " </B> --- <br>" +
+			" --- current time "  + " --- <B> " + String(video.currentTime)  + " </B> --- <br>" +
+			//" --- count "         + " --- <B> " + String(rep_cnt)            + " </B> --- <br>" +
+			"";
+		
+		setTimeout(rep, 250);	
+	}
+	
+	setTimeout(rep, 250);
 
     $.each(titles, function (index, value) {
     	if (index == 0) {
@@ -59,6 +86,7 @@
 	    hls.attachMedia(video);
 	    hls.on(Hls.Events.MEDIA_ATTACHED,function() {
 	    	console.log("parse ok");
+			setTimeout(rep, 250);
 	      //video.play();
 	  });
 	 }
