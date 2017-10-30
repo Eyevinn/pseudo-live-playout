@@ -12,16 +12,20 @@ class User:
 		self.user_name = user_name
 		self.tableu = [
 			'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS/HTTP%20example.m3u8',
-			'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS/HTTP%20example.m3u8']
-		self.titles = ['Video ETT', 'Video 2']
+			'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%202/backhoppning.m3u8',
+			'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%204/sportskor.m3u8']
+			
+			
+		self.titles = ['Springa', 'Backhopp', 'sportskor']
 		self.sequence_number = 0
 		self.tab_index = 0
 		self.seg_index = 0
 		self.curret_tab_start = time.mktime(time.gmtime())
 		self.vods = []
 		for pl in self.tableu:
-			self.vods.append(HLSVod(self.tableu[self.tab_index]))
-			print "added one playlist"
+			#print "about to add " + pl
+			self.vods.append(HLSVod(pl))
+			#print "added one playlist"
 
 
 	def my_id(self):
@@ -50,6 +54,7 @@ class User:
 			if nxt_tab == len(self.tableu):
 				res += self.vods[self.tab_index].get_footer_end()
 				return res
+			#self.tab_index = nxt_tab
 			res += self.vods[nxt_tab].get_header_seam()
 			res += self.vods[nxt_tab].get_segment(bandwidth, nxt_seg)
 		else:

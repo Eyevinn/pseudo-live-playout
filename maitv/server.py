@@ -55,7 +55,7 @@ def hello(name=None):
 
 @app.route("/css/style.css", methods=['GET', 'POST'])
 def css():
-	print "serving css"
+	#print "serving css"
 	#return render_template('data.json'), 201, {'Content-Type': 'application/json'}
 	return render_template('css/style.css'), 200, {'Content-Type': 'text/css'}
 
@@ -71,13 +71,17 @@ def login():
 			user = request.form['user']
 	if request.method == 'GET':
 		user = request.args.get('user', '')
+		
+	html = "{uid}"
+		
+	for uu in usermap:
+		if usermap[uu].user_name == user:
+			return html.format(uid=uid)
+		
 	u = User(user)
 	uid = u.my_id
 	usermap[uid] = u
-	print len(usermap)
-	html = "{uid}"
 	return html.format(uid=uid)
-	#return render_template('index.html', user=u.get_name)
 
 @app.route("/start", methods=['GET', 'POST'])
 def start():
@@ -108,6 +112,8 @@ def view():
 		uid = request.args.get('uid', '')
 	
 	u = usermap[ int(uid) ]
+	
+	name = u.user_name
 
 	res = "" + u.request_main(uid)
 
@@ -120,9 +126,9 @@ def view():
 		first = False
 	jssnutt += "];"
 
-	print jssnutt
+	#print jssnutt
 
-	return render_template('playlistview.html', res=res, jssnutt=jssnutt), 200, {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, HEAD', 'Access-Control-Max-Age': 3000}
+	return render_template('playlistview.html', name=name, uid=uid, res=res, jssnutt=jssnutt), 200, {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, HEAD', 'Access-Control-Max-Age': 3000}
 
 #('Access-Control-Allow-Origin', '*')
 #	return render_template('js/index.js'), 200, {'Content-Type': 'text/js'}
@@ -135,15 +141,15 @@ def play():
 	if request.method == 'GET':
 		uid = request.args.get('uid', '')
 
-	print "got uid " + str(uid)
+	#print "got uid " + str(uid)
 	
 	u = usermap[ int(uid) ]
 
-	print "usermap lookup ok"
+	#print "usermap lookup ok"
 
 	res = "" + u.request_main(uid)
 
-	print "have result request main : " + res
+	#print "have result request main : " + res
 
 	#vod = HLSVod('http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS/HTTP%20example.m3u8')
 	#mastermanifeststring = vod.get_live_master_manifest()

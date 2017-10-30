@@ -61,9 +61,28 @@ class HLSVod:
 		return res;
 
 	def get_segment(self, bitrate, index):
+	
+		if bitrate in self.segments:
+			btr = bitrate
+		else:
+			fnd = False
+			besf = 100.0
+			fb = float(bitrate)
+			for b in self.segments:
+				er = abs((float(b)-fb) / fb)
+				if not fnd:
+					fnd = True
+					btr = b
+					besf = er
+				else:
+					if er < besf:
+						fnd = True
+						btr = b
+						besf = er
+	
 		res = ""
-		res += "#EXTINF:" + str(self.segments[bitrate][index].duration)  + "\n"
-		res += self.uris[bitrate] + self.segments[bitrate][index].uri    + "\n"
+		res += "#EXTINF:" + str(self.segments[btr][index].duration)  + "\n"
+		res += self.uris[btr] + self.segments[btr][index].uri        + "\n"
 		return res
 
 	def get_footer_end(self):
@@ -141,7 +160,7 @@ class HLSVod:
 			master_manifest_string += "\n" + "variant.m3u8?uid="
 			master_manifest_string += uid + "&btr=" + str(playlist.stream_info.bandwidth)
 			master_manifest_string += "\n"
-			break
+			#break
 			#counter += 1
 
 		return master_manifest_string
