@@ -1,5 +1,6 @@
 body {
 	background: rgba(0,0,0,0.85);
+	text-align: center;
 }
 
 h1,h2,h3,h4,h5 {
@@ -19,9 +20,12 @@ p {
 }
 #maitv-logo-red {
 	letter-spacing: 0.5em;
-	color: #ff2a00;
+	color: #7f1500;
 	display: inline
 }
-#titles h2 {
+#now-playing h3 {
 	color: #FFFFFF;
+}
+#titles h3 {
+	color: #cccccc;
 }
