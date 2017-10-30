@@ -30,6 +30,9 @@
 		<button id="play">PLAY</button>
 	</div>
 
+	<div id="now-playing">
+	
+	</div>
 	<div id="titles">
 		
 	</div>
@@ -41,11 +44,12 @@
     {{ jssnutt | safe }} 
 
     $.each(titles, function (index, value) {
-    	//console.log("TITLES");
-    	//console.log(value);
-    	$('#titles').append("<h2>");
-    	$('#titles').append(value);
-    	$('#titles').append("</h2>");
+    	if (index == 0) {
+    		$('#now-playing').append("<h3>" + value +"</h3>");
+    	}
+    	else {
+    		$('#titles').append("<h3>" + value +"</h3>");
+    	}
     });
 
 	  if(Hls.isSupported()) {
