@@ -21,11 +21,16 @@
 <body>
 	<div class="container">
 
-		<div id="logo-section" style="margin:0 auto;">
-			<h1 id="maitv-logo-orange">M</h1>
-			<h1 id="maitv-logo-red">AI</h1>
-			<h1 id="maitv-logo-orange">TV</h1>
-		</div>
+	<div id="logo-section" style="text-align:center;">
+		<center>
+		<h1 id="maitv-logo-orange">M</h1>
+		<h1 id="maitv-logo-red">AI</h1>
+		<h1 id="maitv-logo-orange">TV</h1>
+		<br>
+		<h2 id="maitv-logo-orange"> <i> for {{name}} </i> </h2>
+		</center>
+	</div>
+
 
 		<div class="">
 			<div class="" id="videoplayer-section" style="width: 66%; background: rgba(0,0,0,0); margin: 0 auto; text-align: center;">
@@ -55,13 +60,13 @@
 			}    	
     });
 
-		if(Hls.isSupported()) {
-			var video = document.getElementById('videoplayer');
-			var hls = new Hls();
-			hls.loadSource('http://localhost:8080/play.m3u8?uid=1');
-			hls.attachMedia(video);
-			hls.on(Hls.Events.MEDIA_ATTACHED,function() {
-				console.log("parse ok");
+	  if(Hls.isSupported()) {
+	    var video = document.getElementById('videoplayer');
+	    var hls = new Hls();
+	    hls.loadSource('http://localhost:8080/play.m3u8?uid={{uid}}');
+	    hls.attachMedia(video);
+	    hls.on(Hls.Events.MEDIA_ATTACHED,function() {
+	    	console.log("parse ok");
 	      //video.play();
 	  });
 		}
