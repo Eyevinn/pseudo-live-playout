@@ -1,13 +1,17 @@
 body {
-	background: rgba(0,0,0,0.85);
+	background: rgba(0,0,0,0.85) !important;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
 }
 
-h1,h2,h3,h4,h5 {
-	font-family: 'Roboto Mono', monospace;
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Roboto Mono', monospace !important;
+	color: #FFFFFF;
 }
 
 p {
-	font-family: 'Rubik', sans-serif;
+	font-family: 'Rubik', sans-serif !important;
 }
 #logo-section {
 	display: inline;
@@ -15,13 +19,21 @@ p {
 #maitv-logo-orange {
 	letter-spacing: 0.5em;
 	color: #ff5500;
-	display: inline
+	display: inline;
+	margin: 0 auto;
 }
 #maitv-logo-red {
 	letter-spacing: 0.5em;
 	color: #ff2a00;
-	display: inline
+	display: inline;
+	margin: 0 auto;
 }
-#titles h2 {
+#now-playing {
+	color: #FFFFFF;
+}
+#titles h3 {
+	color: #cccccc;
+}
+.whitetext {
 	color: #FFFFFF;
 }
