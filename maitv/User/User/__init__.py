@@ -1,6 +1,16 @@
 
 import time
+from random import randrange
 from vodtolive import HLSVod
+
+master_tableu = [
+	'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS/HTTP%20example.m3u8',
+	'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%202/backhoppning.m3u8',
+	'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%203/karleken.m3u8',
+	'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%204/sportskor.m3u8',
+	'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%205/STWE2017.m3u8' ]
+
+master_titles = ['Springa', 'Backhopp', 'K&auml;rleken', 'Sportskor', 'STWE']
 
 class User:
 
@@ -10,13 +20,13 @@ class User:
 		self.my_id = User.session_id_counter
 		User.session_id_counter += 1
 		self.user_name = user_name
-		self.tableu = [
-			'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS/HTTP%20example.m3u8',
-			'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%202/backhoppning.m3u8',
-			'http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS%204/sportskor.m3u8']
-			
-			
-		self.titles = ['Springa', 'Backhopp', 'sportskor']
+		self.tableu = []
+		self.titles = []
+		for x in range(0, 3):
+			idx = randrange(len(master_tableu))
+			self.tableu.append(master_tableu[idx])
+			self.titles.append(master_titles[idx])
+
 		self.sequence_number = 0
 		self.tab_index = 0
 		self.seg_index = 0
@@ -35,6 +45,9 @@ class User:
 		return self.user_name
 
 	def restart(self):
+		self.sequence_number = 0
+		self.tab_index = 0
+		self.seg_index = 0
 		self.curret_tab_start = time.mktime(time.gmtime())
 
 

@@ -5,6 +5,7 @@ import socket
 import sys
 import cgi
 import time
+from random import seed
 from flask import request
 from flask import Response
 from vodtolive import HLSVod
@@ -35,6 +36,8 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 starttime = time.gmtime()
 
 usermap = {}
+
+seed()
 
 #@app.route("/")
 @app.route('/hello/')
@@ -111,7 +114,12 @@ def view():
 	if request.method == 'GET':
 		uid = request.args.get('uid', '')
 	
+	if not (int(uid) in usermap):
+		return "unknown uid<br>";
+
 	u = usermap[ int(uid) ]
+	
+	u.restart()
 	
 	name = u.user_name
 
