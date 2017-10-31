@@ -1,3 +1,7 @@
 *.ts
 *.aac
-*egg*
+*.egg-info/
+build/
+html/
+latex/
+dist/

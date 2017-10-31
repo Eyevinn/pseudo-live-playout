@@ -1,6 +1,7 @@
 pip install flask
 pip install redis
 pip install m3u8
+pip install flask_cors
 cd 'vod-to-live'
 python setup.py install
 cd ..
