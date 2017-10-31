@@ -1,2 +1,6 @@
 *.ts
 *.aac
+
+*.egg
+
+*.pyc
