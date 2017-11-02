@@ -7,5 +7,4 @@ cd ..
 cd User
 python setup.py install
 cd ..
-clear
 python server.py

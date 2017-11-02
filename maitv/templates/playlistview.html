@@ -1,10 +1,10 @@
 <!--
-<h3>Hello world!</h3><b>Hostname:</b> a32348bef0a1<br/><b>Visits:</b> <i>cannot connect to Redis, counter disabled</i>
+This webpage displays a video player and a generated playlist
 -->
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+	<meta charset="utf-8">
 	<title>MaiTV</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -16,20 +16,20 @@
 
 	<div id="logo-section" style="text-align:center;">
 		<center>
-		<h1 id="maitv-logo-orange">M</h1>
-		<h1 id="maitv-logo-red">AI</h1>
-		<h1 id="maitv-logo-orange">TV</h1>
-		<br>
-		<h2 id="maitv-logo-orange"> <i> for {{name}} </i> </h2>
+			<h1 id="maitv-logo-orange">M</h1>
+			<h1 id="maitv-logo-red">AI</h1>
+			<h1 id="maitv-logo-orange">TV</h1>
+			<br>
+			<h2 id="maitv-logo-orange"> <i> for {{name}} </i> </h2>
 		</center>
 	</div>
 
 	
 	<div id="active-source">
-	
+
 	</div>
 	
-
+	<!-- VIDEO PLAYER -->
 	<div id="videoplayer-section" style="background: rgba(0,0,0,0); width: 960px; height: 540px; margin: 0 auto; text-align: center;">
 		<video id="videoplayer" width="100%"></video>
 		<button id="play">PLAY</button>
@@ -37,8 +37,9 @@
 	</div>
 
 
+	<!-- PLAYLIST -->
 	<div id="now-playing">
-	
+
 	</div>
 	<div id="titles">
 		
@@ -47,15 +48,15 @@
 
 
 	<script>
-
-    {{ jssnutt | safe }} 
+	//variable containing the video titles
+	{{ jssnutt | safe }} 
 	
 	rep_cnt = 0
 	
 	function rep()
 	{
-	    var video = document.getElementById('videoplayer');
-	    var act_src = document.getElementById('active-source');
+		var video = document.getElementById('videoplayer');
+		var act_src = document.getElementById('active-source');
 		
 		rep_cnt += 1
 
@@ -65,33 +66,37 @@
 			" --- current time "  + " --- <B> " + String(video.currentTime)  + " </B> --- <br>" +
 			//" --- count "         + " --- <B> " + String(rep_cnt)            + " </B> --- <br>" +
 			"";
-		
-		setTimeout(rep, 250);	
-	}
-	
-	setTimeout(rep, 250);
 
-    $.each(titles, function (index, value) {
-    	if (index == 0) {
-    		$('#now-playing').append("<h3>" + value +"</h3>");
-    	}
-    	else {
-    		$('#titles').append("<h3>" + value +"</h3>");
-    	}
-    });
+			setTimeout(rep, 250);	
+		}
 
-	  if(Hls.isSupported()) {
-	    var video = document.getElementById('videoplayer');
-	    var hls = new Hls();
-	    hls.loadSource('http://localhost:8080/play.m3u8?uid={{uid}}');
-	    hls.attachMedia(video);
-	    hls.on(Hls.Events.MEDIA_ATTACHED,function() {
-	    	console.log("parse ok");
+		setTimeout(rep, 250);
+
+	//Appending the video titles
+	$.each(titles, function (index, value) {
+		if (index == 0) {
+			$('#now-playing').append("<h3>" + value +"</h3>");
+		}
+		else {
+			$('#titles').append("<h3>" + value +"</h3>");
+		}
+	});
+
+	//Load master playlist into video player
+	if(Hls.isSupported()) {
+		var video = document.getElementById('videoplayer');
+		var hls = new Hls();
+
+		//Master playlist
+		hls.loadSource('http://localhost:8080/play.m3u8?uid={{uid}}');
+		hls.attachMedia(video);
+		hls.on(Hls.Events.MEDIA_ATTACHED,function() {
+			console.log("parse ok");
 			setTimeout(rep, 250);
 	      //video.play();
 	  });
-	 }
-	</script>
+	}
+</script>
 
 </body>
 </html>
