@@ -15,18 +15,6 @@ from flask_cors import CORS
 from flask import Flask, request, send_from_directory
 from flask import render_template
 
-
-#from flask.ext.cors import CORS, cross_origin
-
-#cors = CORS(app, resources={r"/foo": {"origins": "*"}})
-
-# set the project root directory as the static folder, you can set others.
-#app = Flask(__name__, static_url_path='/views')
-#
-#@app.route('/views')
-#def send_js(path):
-#    return send_from_directory('views', index.html)
-
 # Connect to Redis
 redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
 
@@ -43,30 +31,19 @@ seed()
 @app.route('/hello/')
 @app.route('/hello/<name>')
 def hello(name=None):
-	'''try:
-		visits = redis.incr("counter")
-	except RedisError:
-		visits = "<i>cannot connect to Redis, counter disabled</i>"
-
-	html = "<h3>Hello {name}!</h3>" \
-	       "<b>Hostname:</b> {hostname}<br/>" \
-	       "<b>Visits:</b> {visits}"
-	return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
-	#return render_template('index.html')'''
-	#return render_template('index.html')
 	return render_template('index.html', name=name)
 
+#Serve style.css
 @app.route("/css/style.css", methods=['GET', 'POST'])
 def css():
-	#print "serving css"
-	#return render_template('data.json'), 201, {'Content-Type': 'application/json'}
 	return render_template('css/style.css'), 200, {'Content-Type': 'text/css'}
 
+##Serve index.js
 @app.route("/js/index.js", methods=['GET', 'POST'])
 def js():
 	return render_template('js/index.js'), 200, {'Content-Type': 'text/js'}
 
-
+##Create a user, it will be assigned a user id
 @app.route("/login", methods=['GET', 'POST'])
 def login():
 	if request.method == 'POST':
@@ -86,6 +63,7 @@ def login():
 	usermap[uid] = u
 	return html.format(uid=uid)
 
+
 @app.route("/start", methods=['GET', 'POST'])
 def start():
 	if request.method == 'POST':
@@ -93,19 +71,16 @@ def start():
 			uid = request.form['uid']
 	if request.method == 'GET':
 		uid = request.args.get('uid', '')
-	#print len(usermap)
-	#for key in usermap:
-	#	print("KEY:")
-	#	print key
-	#print uid
+
 	u = usermap[ int(uid) ]
 	html = "Hello there {name} \n"
-	#return html.format( name=u.get_name() )
+
 	return render_template('index.html', user=u.get_name())
 
+#Specifies mimetype
 MIMETPE = 'application/x-mpegURL'
-#MIMETPE = 'text/m3u8'
 
+#Gets master playlist and video titles and returns it to "playlistview.html"
 @app.route("/view.html", methods=['GET', 'POST'])
 def view():
 	if request.method == 'POST':
@@ -134,12 +109,8 @@ def view():
 		first = False
 	jssnutt += "];"
 
-	#print jssnutt
-
 	return render_template('playlistview.html', name=name, uid=uid, res=res, jssnutt=jssnutt), 200, {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, HEAD', 'Access-Control-Max-Age': 3000}
 
-#('Access-Control-Allow-Origin', '*')
-#	return render_template('js/index.js'), 200, {'Content-Type': 'text/js'}
 
 @app.route("/active", methods=['GET', 'POST'])
 def active():
@@ -152,8 +123,10 @@ def active():
 	u = usermap[ int(uid) ]
 	html = ""
 	html += str(u.get_active())
+
 	return html
 
+#Gets master playlist
 @app.route("/play.m3u8", methods=['GET', 'POST'])
 def play():
 	if request.method == 'POST':
@@ -161,23 +134,14 @@ def play():
 			uid = request.form['uid']
 	if request.method == 'GET':
 		uid = request.args.get('uid', '')
-
-	#print "got uid " + str(uid)
 	
 	u = usermap[ int(uid) ]
 
-	#print "usermap lookup ok"
-
 	res = "" + u.request_main(uid)
-
-	#print "have result request main : " + res
-
-	#vod = HLSVod('http://dw2nch8cl472k.cloudfront.net/HLS/Apple%20HLS/HTTP%20example.m3u8')
-	#mastermanifeststring = vod.get_live_master_manifest()
-	#mastermanifeststring = vod.get_user_master_manifest(uid)
 
 	return Response(res,mimetype=MIMETPE)
 
+#Gets variant playlists
 @app.route("/variant.m3u8", methods=['GET', 'POST'])
 def variant():
 	if request.method == 'POST':
@@ -190,13 +154,7 @@ def variant():
 		uid = request.args.get('uid', '')
 		btr = request.args.get('btr', '')
 
-	#print "--- VARIANT ---"
-	#print uid
-	#print btr
-
 	u = usermap[ int(uid) ]
-
-	#print "got user " + u.get_name()
 
 	variant = u.request_variant(btr)
 	u.next()
@@ -208,7 +166,6 @@ def variant():
 def pause():
 	# later
 	return "ok"
-
 
 
 if __name__ == "__main__":
