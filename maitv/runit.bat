@@ -1,4 +1,1 @@
-
-docker build -t maitv .
-
-docker run -a stderr -a stdin -a stdout -i --rm -p 8080:8080 maitv 
+docker run -p 8080:8080 -v C:/GIT/pseudo-live-playout/maitv:/mnt/ -it eyevinntechnology/toolbelt:latest /bin/bash

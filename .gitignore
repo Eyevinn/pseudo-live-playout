@@ -1,8 +1,11 @@
 *.ts
 *.aac
-
+*.egg-info/
+build/
+html/
+latex/
+dist/
 *.egg
-
 *.pyc
 
 *.egg
