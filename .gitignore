@@ -7,5 +7,5 @@ latex/
 dist/
 *.egg
 *.pyc
-
+runit.bat
 *.egg

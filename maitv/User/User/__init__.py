@@ -84,4 +84,9 @@ class User:
 			self.seg_index = 0
 		self.sequence_number += 1
 
-
+	def get_active(self):
+		return self.tab_index;
+	
+	
+	
+	

@@ -120,9 +120,10 @@ def active():
 	if request.method == 'GET':
 		uid = request.args.get('uid', '')
 	
-	u = usermap[ int(uid) ]
 	html = ""
-	html += str(u.get_active())
+	if (uid):
+		u = usermap[ int(uid) ]
+		html += str(u.get_active())
 
 	return html
 
